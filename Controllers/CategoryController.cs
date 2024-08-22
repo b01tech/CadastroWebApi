@@ -28,7 +28,8 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetCategory")]
-    public ActionResult<Category> Get([FromRoute]int id) {
+    public ActionResult<Category> Get([FromRoute] int id)
+    {
         var category = _context.Categories.FirstOrDefault(p => p.CategoryId == id);
 
         if (category == null)
@@ -42,23 +43,23 @@ public class CategoryController : ControllerBase
     [HttpPost]
     public ActionResult Post([FromBody] Category category)
     {
-        if ( category is null)
+        if (category is null)
         {
             return BadRequest();
         }
         _context.Categories.Add(category);
         _context.SaveChanges();
-        return new CreatedAtRouteResult("GetCategory", new {id = category.CategoryId}, category);
+        return new CreatedAtRouteResult("GetCategory", new { id = category.CategoryId }, category);
     }
 
     [HttpPut("{id:int}")]
-    public ActionResult Put([FromRoute] int id, [FromBody]Category category)
+    public ActionResult Put([FromRoute] int id, [FromBody] Category category)
     {
         if (id != category.CategoryId)
         {
             return BadRequest();
         }
-        
+
         _context.Entry(category).State = EntityState.Modified;
         _context.SaveChanges();
 
@@ -67,7 +68,8 @@ public class CategoryController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public ActionResult Delete([FromRoute] int id) {
+    public ActionResult Delete([FromRoute] int id)
+    {
         var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
 
         if (category == null)
