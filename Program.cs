@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 var sqliteConnection = builder.Configuration.GetConnectionString("SqliteConnectionString");
 builder.Services.AddDbContext<AppDbContext>(op => op.UseSqlite(sqliteConnection));
 
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
